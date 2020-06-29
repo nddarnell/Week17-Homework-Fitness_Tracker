@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/myFitPal", {
   useFindAndModify: false
 });
 
-app.use(require("./controllers/routes.js"));
+app.use(require("./routes/routes.js"));
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
