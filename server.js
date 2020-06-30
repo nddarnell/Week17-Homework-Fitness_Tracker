@@ -20,3 +20,4 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/myFitPal", {
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
+

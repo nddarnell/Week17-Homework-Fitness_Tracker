@@ -34,7 +34,5 @@ var workoutSchema = new Schema({
         default: Date.now
     }
 });
-
 const Workout = model("Workout", workoutSchema);
-
 module.exports = Workout;

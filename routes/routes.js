@@ -11,7 +11,7 @@ const { db } = require("../models/workouts.js");
 
 // api/workouts get and post routes
 // api/workouts/range get route only?
-router.get("/api/workout", async (req, res) => {
+router.get("/api/workouts", async (req, res) => {
     try {
         const data = await db.Workout.find({})
         res.json(data)
@@ -24,12 +24,22 @@ router.get("/api/workout", async (req, res) => {
 
 
 
-router.post("/api/workout", async ({body}, res) =>{
+router.post("/api/workouts", async ({body}, res) =>{
     try {
         const data = await db.Workout.create(body)
         res.json(data)
     }
     catch (error){
+        console.log(error)
+        res.send(error)
+    }
+})
+
+router.put("/api/workouts/:id", async(req, res)=>{
+    try {
+        const data = await db.Workout.findByIdAndUpdate(req.params.id, {$push: {excercises: req.body}});
+        res.json(data)
+    } catch (error) {
         console.log(error)
         res.send(error)
     }
