@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const Workouts = require("../models/workouts.js");
+const Workout = require("../models/workouts.js");
+const { db } = require("../models/workouts.js");
 
 //need to add get and post routes
 //readME stats the following copy paste
@@ -9,4 +11,29 @@ const Workouts = require("../models/workouts.js");
 
 // api/workouts get and post routes
 // api/workouts/range get route only?
+router.get("/api/workout", async (req, res) => {
+    try {
+        const data = await db.Workout.find({})
+        res.json(data)
+    }
+    catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+  });
 
+
+
+router.post("/api/workout", async ({body}, res) =>{
+    try {
+        const data = await db.Workout.create(body)
+        res.json(data)
+    }
+    catch (error){
+        console.log(error)
+        res.send(error)
+    }
+})
+
+
+module.exports = router;

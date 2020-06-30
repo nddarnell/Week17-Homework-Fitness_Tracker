@@ -1,5 +1,4 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const {Schema, model} = require("mongoose")
 
 var workoutSchema = new Schema({
     type: {
@@ -36,6 +35,6 @@ var workoutSchema = new Schema({
     }
 });
 
-var Workout = mongoose.model("Workout", workoutSchema);
+const Workout = model("Workout", workoutSchema);
 
 module.exports = Workout;
