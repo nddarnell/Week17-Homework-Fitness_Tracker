@@ -45,5 +45,15 @@ router.put("/api/workouts/:id", async(req, res)=>{
     }
 })
 
+router.get("/api/workouts/range", async(req, res)=>{
+    try {
+        const data = await db.Workout.find({})
+        res.json(data)
+    } catch (error) {
+        console.log(error)
+        res.send(error)
+    }
+})
+
 
 module.exports = router;
