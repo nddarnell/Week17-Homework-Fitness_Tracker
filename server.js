@@ -13,8 +13,10 @@ app.use(require("./routes/routes.js"));
 
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/myFitPal", {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
+
 
 
 app.listen(PORT, () => {
