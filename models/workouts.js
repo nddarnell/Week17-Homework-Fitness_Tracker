@@ -1,6 +1,6 @@
 const {Schema, model} = require("mongoose")
 
-var workoutSchema = new Schema({
+const workoutSchema = new Schema({
     day: {
         type: Date,
         default: Date.now()
@@ -14,15 +14,17 @@ var workoutSchema = new Schema({
             },
             name: {
                 type: String,
-                trim: true
+                trim: true,
+                required: true
             },
             duration: Number,
             weight: Number,
             reps: Number,
             sets: Number,
-            distance: Number,
-            totalExercise: Number,
-            totalDuration: Number
+            distance: {
+                type: Number,
+                required: true
+            },
         }
     ]
 });

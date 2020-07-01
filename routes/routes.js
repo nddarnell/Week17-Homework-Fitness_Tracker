@@ -18,7 +18,7 @@ router.get("/api/workouts", async (req, res) => {
             workout.totalDuration = totalDuration;
             workout.totalDistance = totalDistance;
 
-            return {...workout._doc, totalDuration};
+            return {...workout, totalDuration};
 
         })
 
@@ -37,6 +37,7 @@ router.post("/api/workouts", async ({body}, res) =>{
     try {
         const data = await db.Workout.create(body)
         res.json(data)
+        console.log(data)
     }
     catch (error){
         console.log(error)
