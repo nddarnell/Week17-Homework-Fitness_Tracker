@@ -15,7 +15,6 @@ router.get("/exercise", (req, res)=>{
 router.get("/stats", (req, res)=>{
     res.sendFile(path.join(__dirname, "../public/stats.html"))
 })
-
 router.get("/api/workouts", async (req, res) => {
     try {
         let data = await db.Workout.find({})
@@ -56,7 +55,7 @@ router.get("/api/workouts", async (req, res) => {
 
 router.post("/api/workouts", async ({body}, res) =>{
     try {
-        const data = await db.Workout.create(body) //does this need to change to req.body?
+        const data = await db.Workouts.create(body) //does this need to change to req.body?
         res.json(data)
         // console.log(data)
     }
@@ -68,7 +67,7 @@ router.post("/api/workouts", async ({body}, res) =>{
 
 router.put("/api/workouts/:id", async(req, res)=>{
     try {
-        const data = await db.Workout.findByIdAndUpdate(req.params.id, {$push: {excercises: req.body}});
+        const data = await db.Workouts.findByIdAndUpdate(req.params.id, {$push: {excercises: req.body}});
         res.json(data)
     } catch (error) {
         console.log(error)
@@ -78,7 +77,7 @@ router.put("/api/workouts/:id", async(req, res)=>{
 
 router.get("/api/workouts/range", async(req, res)=>{
     try {
-        const data = await db.Workout.find({})
+        const data = await db.Workouts.find({})
         res.json(data)
     } catch (error) {
         console.log(error)
