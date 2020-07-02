@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const db = require("../models/workouts.js");
-const path = require("path")
+const path = require("path");
+const { networkInterfaces } = require("os");
 
 // add in regular page routes
 router.get("/", (req, res)=>{
@@ -17,7 +18,33 @@ router.get("/stats", (req, res)=>{
 
 router.get("/api/workouts", async (req, res) => {
     try {
-        
+        let data = await db.Workout.find({})
+
+        const totalLengthOfTime = (data)=>{
+
+            let newItem = [];
+
+            data.forEach(day=>{
+                let newDuration = 0;
+
+                day.excercises.forEach(exercise=>{
+                    newDuration = newDuration + exercise.duration;
+                    return newDuration
+                })
+
+                const newDay = {
+                    "day": day.day,
+                    "id": day._id,
+                    "exercise": day.exercises,
+                    "totalDuration": newDuration
+                };
+                return newItem.push(newDay);
+            })
+
+            return newItem;
+        }
+        data = totalLengthOfTime(data);
+        res.json(data)
     }
     catch (error) {
         console.log(error)
@@ -29,9 +56,9 @@ router.get("/api/workouts", async (req, res) => {
 
 router.post("/api/workouts", async ({body}, res) =>{
     try {
-        const data = await db.Workout.create(body)
+        const data = await db.Workout.create(body) //does this need to change to req.body?
         res.json(data)
-        console.log(data)
+        // console.log(data)
     }
     catch (error){
         console.log(error)
