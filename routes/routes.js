@@ -1,29 +1,23 @@
 const router = require("express").Router();
-const Workouts = require("../models/workouts.js");
-const Workout = require("../models/workouts.js");
 const db = require("../models/workouts.js");
+const path = require("path")
+
+// add in regular page routes
+router.get("/", (req, res)=>{
+    res.sendFile(path.join(__dirname, "../public/index.html"))
+})
+
+router.get("/exercise", (req, res)=>{
+    res.sendFile(path.join(__dirname, "../public/exercise.html"))
+})
+
+router.get("/stats", (req, res)=>{
+    res.sendFile(path.join(__dirname, "../public/stats.html"))
+})
 
 router.get("/api/workouts", async (req, res) => {
     try {
-        let data = await db.find({})
-
-        data = data.map(workout=>{
-            let totalDuration = 0;
-            let totalDistance = 0;
-            workout.excercises.forEach(exercise => {
-                totalDuration = totalDuration + exercise.duration;
-                totalDistance = totalDistance + exercise.distance
-            });
-
-            workout.totalDuration = totalDuration;
-            workout.totalDistance = totalDistance;
-
-            return {...workout, totalDuration};
-
-        })
-
-        console.log(data)
-        res.json(data)
+        
     }
     catch (error) {
         console.log(error)
