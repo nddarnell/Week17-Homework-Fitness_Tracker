@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const db = require("../models/workouts.js");
 const path = require("path");
-const { networkInterfaces } = require("os");
 
 // add in regular page routes
 router.get("/", (req, res)=>{
